@@ -1,0 +1,25 @@
+let uploadedImage;
+
+function setup() {
+  createCanvas(800, 600);
+  background(255);
+
+  // Create an HTML file input element
+  let fileInput = createFileInput(handleFile);
+  fileInput.position(20, 20); // Adjust position as needed
+
+  // Text instructions
+  textSize(16);
+  text("Upload an image to display on the canvas.", 20, 80);
+}
+
+function handleFile(file) {
+  if (file.type === 'image') {
+    uploadedImage = loadImage(file.data, () => {
+      background(255); // Clear canvas before displaying new image
+      image(uploadedImage, 0, 100, width, height - 100); // Display the image below instructions
+    });
+  } else {
+    console.log("Not an image file!");
+  }
+}
